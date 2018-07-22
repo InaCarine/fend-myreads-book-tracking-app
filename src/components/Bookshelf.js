@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import Book from './Book';
 
 class Bookshelf extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    books: PropTypes.array.isRequired,
+    changeShelf: PropTypes.func.isRequired,
+  }
+
   render() {
+    const shelf = this.props;
+
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.name}</h2>
+        <h2 className="bookshelf-title">{shelf.name}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.props.books.map(book => (
+            {shelf.books.map(book => (
               <li key={book.id}>
                 <Book
-                  cover={book.imageLinks.thumbnail}
-                  title={book.title}
-                  authors={book.authors}
+                  book={book}
+                  changeShelf={shelf.changeShelf}
                 />
               </li>
             ))}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import Bookshelf from './Bookshelf';
 
 class ListBooks extends Component {
@@ -8,21 +9,18 @@ class ListBooks extends Component {
   // To make sure the props given is of the type wanted and if they are required
   static propTypes = {
     books: PropTypes.array.isRequired,
+    changeShelf: PropTypes.func.isRequired,
   };  
 
   render() {
     const books = this.props.books;
-    console.log(books);
     
-    // eslint-disable-next-line
     let { currentlyReading, wantToRead, read } = [];
 
-    currentlyReading = books.filter(contact => contact.shelf === 'currentlyReading');
-    wantToRead = books.filter(contact => contact.shelf === 'wantToRead');
-    read = books.filter(contact => contact.shelf === 'read');
-
-    //TODO: Add sort by name
-      // + Add more select bys
+    // Sort all the books into the shelf they belong to
+    currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
+    wantToRead = books.filter(book => book.shelf === 'wantToRead');
+    read = books.filter(book => book.shelf === 'read');
 
     return (
       <div className="list-books">
@@ -33,9 +31,9 @@ class ListBooks extends Component {
 
         <div className="list-books-content">
           <div>
-            <Bookshelf name="Currently Reading" books={currentlyReading} />
-            <Bookshelf name="Want to Read" books={wantToRead} />
-            <Bookshelf name="Read" books={read} />
+            <Bookshelf name="Currently Reading" books={currentlyReading} changeShelf={this.props.changeShelf} />
+            <Bookshelf name="Want to Read" books={wantToRead} changeShelf={this.props.changeShelf} />
+            <Bookshelf name="Read" books={read} changeShelf={this.props.changeShelf} />
           </div>
         </div>
 
