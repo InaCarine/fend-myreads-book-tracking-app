@@ -42,7 +42,7 @@ class BooksApp extends Component {
     }).catch(error => console.log('An error happened while trying to move the book: ', error));
   };
 
-  render() {
+render() {
     return (
       <div className="app">
         <Route exact path="/" render={() => (

@@ -28,7 +28,9 @@ class SearchBooks extends Component {
 
   getResults = (query) => {
 
-    if (query !== '') {
+    if (query === '') {
+      this.setState({ results: [], query: '' })
+    } else {
       // Search the API with the query
       BooksAPI.search(query).then(books => {
         // IF results found, update the state with the response
@@ -40,8 +42,6 @@ class SearchBooks extends Component {
         }
         this.setState({ isSearching: false });
       });
-    } else {
-      this.setState({ results: [] })
     }
   };
 
@@ -69,16 +69,21 @@ class SearchBooks extends Component {
               <p>No books found</p>
             )
           }
-          <ol className="books-grid">
-            {results.map(book => (
-              <li key={book.id}>
-                <Book
-                  book={book}
-                  changeShelf={this.props.changeShelf}
-                />
-              </li>
-            ))}
-          </ol>
+          {
+            (query && results.length > 0 && !this.state.isSearching) && (
+              <ol className="books-grid">
+                {results.map(book => (
+                  <li key={book.id}>
+                    <Book
+                      book={book}
+                      changeShelf={this.props.changeShelf}
+                    />
+                  </li>
+                ))}
+              </ol>
+            )
+          }
+          
         </div>
       </div>
     );
