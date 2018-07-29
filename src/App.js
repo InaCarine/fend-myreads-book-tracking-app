@@ -49,7 +49,7 @@ render() {
           <ListBooks books={this.state.books} changeShelf={this.updateShelf} />
         )} />
         <Route path="/search" render={({ history }) => (
-          <SearchBooks books={this.state.books} changeShelf={this.updateShelf} />
+          <SearchBooks appBooks={this.state.books} changeShelf={this.updateShelf} />
         )} />
       </div>
     )

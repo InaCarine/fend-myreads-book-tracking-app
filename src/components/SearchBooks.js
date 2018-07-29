@@ -7,7 +7,7 @@ import Book from './Book';
 
 class SearchBooks extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
+    appBooks: PropTypes.array.isRequired,
     changeShelf: PropTypes.func.isRequired,
   };
 
@@ -36,11 +36,18 @@ class SearchBooks extends Component {
         // IF results found, update the state with the response
         // else set the result to empty
         if (!books.error) {
-          this.setState({ results: books });
+          // Go through the search results 
+          // and filter the ones that match the books on the shelf
+          // to update their shelf value so it is not set to none
+          books.map(searchBook => 
+            this.props.appBooks.filter(appBook => 
+              appBook.id === searchBook.id
+            ).map(appBook => searchBook.shelf = appBook.shelf)
+          );
         } else {
-          this.setState({ results: [] });
+          books = [];
         }
-        this.setState({ isSearching: false });
+        this.setState({ results: books ,isSearching: false });
       });
     }
   };
