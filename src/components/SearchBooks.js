@@ -24,12 +24,12 @@ class SearchBooks extends Component {
     // Update the state with the query and then call the book API.
     this.setState({ query: query, isSearching: true });
     this.getResults(query);
-  }
+  };
 
   getResults = (query) => {
 
     if (query === '') {
-      this.setState({ results: [], query: '' })
+      this.setState({ results: [], query: '' });
     } else {
       // Search the API with the query
       BooksAPI.search(query).then(books => {

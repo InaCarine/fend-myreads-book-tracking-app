@@ -3,10 +3,8 @@ import { Route } from 'react-router-dom';
 import sortBy from 'sort-by';
 import * as BooksAPI from './utils/BooksAPI';
 
-// App styles
 import './App.css';
 
-// App Components
 import ListBooks from "./components/ListBooks";
 import SearchBooks from "./components/SearchBooks";
 
@@ -42,7 +40,7 @@ class BooksApp extends Component {
     }).catch(error => console.log('An error happened while trying to move the book: ', error));
   };
 
-render() {
+  render() {
     return (
       <div className="app">
         <Route exact path="/" render={() => (
@@ -56,4 +54,4 @@ render() {
   }
 }
 
-export default BooksApp
+export default BooksApp;
